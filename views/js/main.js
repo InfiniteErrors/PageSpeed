@@ -423,22 +423,22 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
     // Changes the slider value to a percent width
 
-    var newwidth = 100;
+    var pizzaWidth = 100;
     function sizeSwitcher (size) {
       switch(size) {
         case "1":
-          newwidth = 25;
+          pizzaWidth = 25;
           break;
         case "2":
-          newwidth = 33.3;
+          pizzaWidth = 33.3;
           break;
         case "3":
-          newwidth = 50;
+          pizzaWidth = 50;
           break;
         default:
           console.log("bug in sizeSwitcher");
       }
-      return newwidth;
+      return pizzaWidth;
     }
 
     sizeSwitcher(size);
@@ -448,7 +448,7 @@ var resizePizzas = function(size) {
 
     var pizzaSelect = document.querySelectorAll(".randomPizzaContainer");
     for (var i = 0; i < pizzaSelect.length; i++) {
-      pizzaSelect[i].style.width = newwidth + '%';
+      pizzaSelect[i].style.width = pizzaWidth + '%';
     }
   }
 
@@ -492,16 +492,36 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
+//Trying out a technique/pattern from https://www.html5rocks.com/en/tutorials/speed/animations/
+
+var latestKnownScrollY = 0;
+var ticking = false;
+
+function onScroll() {
+	latestKnownScrollY = window.scrollY;
+  requestTick();
+}
+
+function requestTick() {
+	if(!ticking) {
+		requestAnimationFrame(updatePositions);
+	}
+	ticking = true;
+}
+
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
+
+  var currentScrollY = latestKnownScrollY;
 
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
+  requestAnimationFrame(updatePositions);
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
