@@ -514,7 +514,7 @@ function updatePositions() {
   ticking = false;
   frame++;
   window.performance.mark("mark_start_frame");
-  ticking = false;
+
 
   var currentScrollY = latestKnownScrollY / 1250;
 
@@ -523,7 +523,6 @@ function updatePositions() {
     var phase = Math.sin(currentScrollY + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-  requestAnimationFrame(updatePositions);
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -544,9 +543,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var s = 256;
   // Trying a different selection method to get this query out of the loop. https://www.w3schools.com/jsref/met_document_getelementbyid.asp
   var slidingPizza = document.getElementById('movingPizzas1');
-  var elem;
+
   for (var i = 0; i < 25; i++) {
-    elem = document.createElement('img');
+    var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
