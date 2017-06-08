@@ -511,14 +511,16 @@ function requestTick() {
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+  ticking = false;
   frame++;
   window.performance.mark("mark_start_frame");
+  ticking = false;
 
-  var currentScrollY = latestKnownScrollY;
+  var currentScrollY = latestKnownScrollY / 1250;
 
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin(currentScrollY + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
   requestAnimationFrame(updatePositions);
@@ -533,22 +535,25 @@ function updatePositions() {
   }
 }
 
-// runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+// runs onScroll which resets the tick, which will then request a new frame at the RIGHT time. Groovy!
+window.addEventListener('scroll', onScroll);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+  // Trying a different selection method to get this query out of the loop. https://www.w3schools.com/jsref/met_document_getelementbyid.asp
+  var slidingPizza = document.getElementById('movingPizzas1');
+  var elem;
+  for (var i = 0; i < 25; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    slidingPizza.appendChild(elem);
   }
   updatePositions();
 });
