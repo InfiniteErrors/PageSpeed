@@ -22,4 +22,4 @@ The update positions functions was the tough one. Seeing as this was my first ti
 
  #### Need help getting this page running?
 
-Follow this link
+Follow this [link] (https://infiniteerrors.github.io/PageSpeed/) and browse away.
