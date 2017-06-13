@@ -1,5 +1,5 @@
 ## Website Performance Optimization portfolio project
-This is my submission for the Performance Optimization project. So far it's been a great way to really dig into how a page runs javascript and some things developers have to watch out for.
+This is my submission for the Performance Optimization project. So far it's been a great way to dig into how a page runs javascript.
 
 ### Getting started
 
@@ -22,4 +22,4 @@ The update positions functions was the tough one. Seeing as this was my first ti
 
  #### Need help getting this page running?
 
-Follow this [link](https://infiniteerrors.github.io/PageSpeed/) and browse away.
+Follow [this link](https://infiniteerrors.github.io/PageSpeed/) and browse away.
