@@ -446,7 +446,7 @@ var resizePizzas = function(size) {
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
 
-    var pizzaSelect = document.querySelectorAll(".randomPizzaContainer");
+    var pizzaSelect = document.getElementsByClassName("randomPizzaContainer");
     for (var i = 0; i < pizzaSelect.length; i++) {
       pizzaSelect[i].style.width = pizzaWidth + '%';
     }
@@ -464,8 +464,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -524,7 +524,7 @@ function updatePositions() {
     //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     //When I was researching how to redo this area, I typed 'basicLeft Javascript' into
     //Google and it linked me straight to the transform property. Nice... https://www.w3schools.com/jsref/prop_style_transform.asp
-    items[i].style.transform = 'translateX('+ phase + 'px)';
+    items[i].style.transform = 'translateX('+ 100 * phase + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   // Math.Round was not quiet working. But math.ceil saves the DAY! https://www.w3schools.com/jsref/jsref_ceil.asp
-  pizzaNum = Math.ceil(window.innerHeight / 256) * cols;
+  pizzaNum = Math.ceil(window.innerHeight / s) * cols;
   // Trying a different selection method to get this query out of the loop. https://www.w3schools.com/jsref/met_document_getelementbyid.asp
   var slidingPizza = document.getElementById('movingPizzas1');
 
@@ -556,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
+    elem.style.left = (i % cols) * s + 'px';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     slidingPizza.appendChild(elem);
   }

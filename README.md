@@ -10,11 +10,11 @@ Also inlining the CSS proved to be very helpful for mobile users which made sens
 
 #### Part 2: Optimize Frames per Second in pizza.html
 
-I must admit I was out of my javascript depth on this file. But after reading through come of the source material provided. My basic strategy was just to look for logic that was being repeated unnecessarily and try to simplify it. Also there was functions that were doing things like creating 100 pizza animations on the page at once. When really we should be accounting for the window size instead. I tried using "innerWidth" for the longest time and then realized that was silly. InnerHeight rounded up each time makes for a far better solution.
+I must admit I was out of my JavaScript depth on this file. But after reading through come of the source material provided. My basic strategy was just to look for logic that was being repeated unnecessarily and try to simplify it. Also there was functions that were doing things like creating 100 pizza animations on the page at once. When really we should be accounting for the window size instead. I tried using "innerWidth" for the longest time and then realized that was silly. InnerHeight rounded up each time makes for a far better solution.
 
-The resizepizza function saw a big update and simplification. It was doing all of these crazy calculations inside of loops that never needed to be done in the first place. That function now simply changes the css width style of each pizza picture on the page to a new percentage.
+The resizepizza function saw a big update and simplification. It was doing all of these crazy calculations inside of loops that never needed to be done in the first place. That function now simply changes the CSS width style of each pizza picture on the page to a new percentage.
 
-The update positions functions was the tough one. Seeing as this was my first time dealing with animation frames. This article from Paul Lewis was my guide. Thanks Paul! In a nutshell, this technique allows the browser to choose when the optimal time to bring up a new frame.
+The update positions functions were the tough ones. Seeing as this was my first time dealing with animation frames. This article from Paul Lewis was my guide. Thanks Paul! In a nutshell, this technique allows the browser to choose when the optimal time to bring up a new frame.
  https://www.html5rocks.com/en/tutorials/speed/animations/
 
 
@@ -23,3 +23,6 @@ The update positions functions was the tough one. Seeing as this was my first ti
  #### Need help getting this page running?
 
 Follow [this link](https://infiniteerrors.github.io/PageSpeed/) and browse away.
+
+#### Want to run this website locally?
+Download or clone the repository to your machine and then launch the index.html file in your favorite browser. I did all of my testing in Google Chrome. The site will likely be best represented using that browser.
