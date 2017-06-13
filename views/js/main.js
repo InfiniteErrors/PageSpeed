@@ -517,11 +517,12 @@ function updatePositions() {
 
 
   var currentScrollY = latestKnownScrollY / 1250;
-
+  var winWidth = self.innerWidth;
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(currentScrollY + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = Math.sin(currentScrollY + (i % 5)) * winWidth / 2;
+    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.transform = 'translateX('+ phase + 'px)';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -541,10 +542,13 @@ window.addEventListener('scroll', onScroll);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  // Math.Round was not quiet working. But math.ceil saves the DAY! https://www.w3schools.com/jsref/jsref_ceil.asp
+  pizzaNum = Math.ceil(window.innerHeight / 256) * cols;
   // Trying a different selection method to get this query out of the loop. https://www.w3schools.com/jsref/met_document_getelementbyid.asp
   var slidingPizza = document.getElementById('movingPizzas1');
 
-  for (var i = 0; i < 25; i++) {
+// Seems like 25 pizzas fills the page nicely.
+  for (var i = 0; i < pizzaNum; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
