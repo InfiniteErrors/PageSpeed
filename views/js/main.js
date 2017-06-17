@@ -518,9 +518,9 @@ function updatePositions() {
 
   var currentScrollY = latestKnownScrollY / 1250;
   var winWidth = self.innerWidth;
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(currentScrollY + (i % 5)) * winWidth / 2;
+    var phase = Math.sin(currentScrollY + (i % 5));
     //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
     //When I was researching how to redo this area, I typed 'basicLeft Javascript' into
     //Google and it linked me straight to the transform property. Nice... https://www.w3schools.com/jsref/prop_style_transform.asp
